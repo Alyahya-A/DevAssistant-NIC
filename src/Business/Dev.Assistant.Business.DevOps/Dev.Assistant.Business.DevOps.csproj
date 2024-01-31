@@ -1,0 +1,10 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<Import Project="..\..\Build\Dev.Assistant.Target.props" />
+
+	<ItemGroup>
+		<ProjectReference Include="..\Dev.Assistant.Business.Core\Dev.Assistant.Business.Core.csproj" />
+		<ProjectReference Include="..\Dev.Assistant.Business.Decoder\Dev.Assistant.Business.Decoder.csproj" />
+	</ItemGroup>
+
+</Project>

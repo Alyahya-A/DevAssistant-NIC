@@ -1,0 +1,29 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+	<Import Project="..\..\Build\Dev.Assistant.Project.props" />
+	
+	<PropertyGroup>
+		<OutputType>Exe</OutputType>
+		<TargetFramework>net6.0-windows</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<ApplicationIcon>programmingV2.ico</ApplicationIcon>
+		<Product>DevAssistant Btach is used to update DevAssistant.exe app automatically</Product>
+		<AssemblyName>DevAssistantBatch</AssemblyName>
+		<Version>1.8</Version>
+	</PropertyGroup>
+
+
+	<ItemGroup>
+		<Content Include="programmingV2.ico" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+		<PackageReference Include="Serilog.Sinks.File" Version="5.0.0" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\..\Business\Dev.Assistant.Configuration\Dev.Assistant.Configuration.csproj" />
+	</ItemGroup>
+
+</Project>

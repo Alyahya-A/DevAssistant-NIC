@@ -1,0 +1,739 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "NIC APIs - Authorization Server",
+    "version": "v1"
+  },
+  "paths": {
+    "/api/Account": {
+      "post": {
+        "tags": [
+          "Account"
+        ],
+        "summary": "Create a new User",
+        "requestBody": {
+          "description": "the request payload",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateUserBindingModel"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Confirmation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Error in Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/IdentityResult"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Access denied",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Nullable"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Account/{username}": {
+      "get": {
+        "tags": [
+          "Account"
+        ],
+        "summary": "Returns user details by username",
+        "parameters": [
+          {
+            "name": "username",
+            "in": "path",
+            "description": "the request payload",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "User details",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserReturnModel"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "No data found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Access denied",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Nullable"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Account/Role": {
+      "post": {
+        "tags": [
+          "Account"
+        ],
+        "summary": "Assigning Role to a user",
+        "requestBody": {
+          "description": "The request payload",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AddingRole"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Confirmation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Error in Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "No data found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Access denied",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Nullable"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/DbConfig": {
+      "post": {
+        "tags": [
+          "DbConfig"
+        ],
+        "summary": "Create a new key",
+        "requestBody": {
+          "description": "the request payload",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DbConfigBinding"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Confirmation message",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Error message",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Access denied",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Nullable"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Role": {
+      "post": {
+        "tags": [
+          "Role"
+        ],
+        "summary": "Create a new role",
+        "requestBody": {
+          "description": "the request payload",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateRoleBindingModel"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Confirmation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Error in Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/IdentityResult"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Access denied",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Nullable"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/oauth/token": {
+      "post": {
+        "tags": [
+          "Token"
+        ],
+        "summary": "Token Generation",
+        "requestBody": {
+          "description": "",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AuthorizeRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AuthorizeRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/AuthorizeRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "New Token information",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/JwtTokenResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JwtTokenResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JwtTokenResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Error",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Access denied",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/Nullable"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Nullable"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Nullable"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "AddingRole": {
+        "required": [
+          "operatorID",
+          "roleToAssign",
+          "userName"
+        ],
+        "type": "object",
+        "properties": {
+          "userName": {
+            "type": "string",
+            "description": "User name<br />\r\nاسم المستخدم"
+          },
+          "roleToAssign": {
+            "type": "string",
+            "description": "Role name<br />\r\nاسم الصلاحية"
+          },
+          "operatorID": {
+            "type": "number",
+            "description": "Operator identification number<br />\r\nرقم هوية المشغل",
+            "format": "double"
+          }
+        },
+        "additionalProperties": false
+      },
+      "AuthorizeRequest": {
+        "required": [
+          "grant_type",
+          "password",
+          "username"
+        ],
+        "type": "object",
+        "properties": {
+          "username": {
+            "maxLength": 256,
+            "minLength": 0,
+            "type": "string",
+            "description": "User name<br />\r\nاسم المستخدم"
+          },
+          "password": {
+            "maxLength": 256,
+            "minLength": 0,
+            "type": "string",
+            "description": "User's password<br />\r\nكلمةالمرور",
+            "format": "password"
+          },
+          "grant_type": {
+            "type": "string",
+            "description": "Grant type<br />\r\nنوع التحقق"
+          }
+        },
+        "additionalProperties": false
+      },
+      "CreateRoleBindingModel": {
+        "required": [
+          "name",
+          "operatorID"
+        ],
+        "type": "object",
+        "properties": {
+          "name": {
+            "maxLength": 256,
+            "minLength": 2,
+            "type": "string",
+            "description": "Role name<br />\r\nاسم الصلاحية"
+          },
+          "operatorID": {
+            "type": "number",
+            "description": "Operator identification number<br />\r\nرقم هوية المشغل",
+            "format": "double"
+          }
+        },
+        "additionalProperties": false
+      },
+      "CreateUserBindingModel": {
+        "required": [
+          "confirmPassword",
+          "email",
+          "name",
+          "nameTr",
+          "operatorID",
+          "password",
+          "serviceContract",
+          "userName"
+        ],
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string",
+            "description": "Email address for the user<br />\r\nالبريد الالكتروني للمستخدم",
+            "format": "email"
+          },
+          "userName": {
+            "type": "string",
+            "description": "User name<br />\r\nاسم المستخدم"
+          },
+          "name": {
+            "type": "string",
+            "description": "Full user's name in Arabic<br />\r\nالاسم الكامل للمستخدم بالعربي"
+          },
+          "nameTr": {
+            "type": "string",
+            "description": "the full translated user's name<br />\r\nالاسم الكامل للمستخدم المترجم"
+          },
+          "password": {
+            "maxLength": 100,
+            "minLength": 6,
+            "type": "string",
+            "description": "User's password<br />\r\nكلمة المرور",
+            "format": "password"
+          },
+          "confirmPassword": {
+            "type": "string",
+            "description": "Confirmed user's password<br />\r\nتاكيد كلمة المرور",
+            "format": "password"
+          },
+          "operatorID": {
+            "type": "number",
+            "description": "Operator identification number<br />\r\nرقم هوية المشغل",
+            "format": "double"
+          },
+          "serviceContract": {
+            "type": "string",
+            "description": "User's service contract<br />\r\nالاسم المختصر للجهة"
+          }
+        },
+        "additionalProperties": false
+      },
+      "DbConfigBinding": {
+        "required": [
+          "appName",
+          "isProtected",
+          "key",
+          "operatorID",
+          "value"
+        ],
+        "type": "object",
+        "properties": {
+          "appName": {
+            "maxLength": 64,
+            "type": "string",
+            "description": "Application Name"
+          },
+          "key": {
+            "maxLength": 256,
+            "type": "string",
+            "description": "Key Name"
+          },
+          "value": {
+            "type": "string",
+            "description": "Key Value"
+          },
+          "isProtected": {
+            "type": "boolean",
+            "description": "Value encryption indicator"
+          },
+          "operatorID": {
+            "type": "number",
+            "description": "Operator identification number<br />\r\nرقم هوية المشغل",
+            "format": "double"
+          }
+        },
+        "additionalProperties": false,
+        "description": "Db Confing Binding DTO"
+      },
+      "IdentityError": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string",
+            "nullable": true
+          },
+          "description": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "IdentityResult": {
+        "type": "object",
+        "properties": {
+          "succeeded": {
+            "type": "boolean",
+            "readOnly": true
+          },
+          "errors": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/IdentityError"
+            },
+            "nullable": true,
+            "readOnly": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "JwtTokenResponse": {
+        "type": "object",
+        "properties": {
+          "access_token": {
+            "type": "string",
+            "description": "Access token value<br />\r\nرمز الدخول للخدمات",
+            "nullable": true
+          },
+          "issued_at": {
+            "type": "string",
+            "description": "Issue date<br />\r\nتاريخ الانشاء",
+            "format": "date-time"
+          },
+          "expires_in": {
+            "type": "integer",
+            "description": "Expire duration in seconds (Token Lifetime)<br />\r\nفترة انتهاء رمز الدخول للخدمات بالثواني",
+            "format": "int32"
+          },
+          "expires_on": {
+            "type": "integer",
+            "description": "Expiry date in unix format number<br />\r\nتاريخ الانتهاء بشكل رقمي",
+            "format": "int64"
+          },
+          "expires_on_date": {
+            "type": "string",
+            "description": "Expiry date<br />\r\nتاريخ الانتهاء",
+            "format": "date-time"
+          },
+          "token_type": {
+            "type": "string",
+            "description": "Type of token<br />\r\nنوع رمز الدخول",
+            "nullable": true,
+            "readOnly": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "Nullable": {
+        "type": "object",
+        "additionalProperties": false
+      },
+      "ProblemDetails": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "nullable": true
+          },
+          "title": {
+            "type": "string",
+            "nullable": true
+          },
+          "status": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "detail": {
+            "type": "string",
+            "nullable": true
+          },
+          "instance": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": {}
+      },
+      "UserReturnModel": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "User code<br />\r\nرمز المستخدم",
+            "nullable": true
+          },
+          "userName": {
+            "type": "string",
+            "description": "User name<br />\r\nاسم المستخدم",
+            "nullable": true
+          },
+          "name": {
+            "type": "string",
+            "description": "Full user's name in Arabic<br />\r\nالاسم الكامل للمستخدم بالعربي",
+            "nullable": true
+          },
+          "nameTr": {
+            "type": "string",
+            "description": "the full translated user's name<br />\r\nالاسم الكامل للمستخدم المترجم",
+            "nullable": true
+          },
+          "email": {
+            "type": "string",
+            "description": "Email address for the user<br />\r\nالبريد الالكتروني للمستخدم",
+            "nullable": true
+          },
+          "joinDate": {
+            "type": "string",
+            "description": "User create timestamp<br />\r\nتاريخ انشاء حساب المستخدم",
+            "format": "date-time"
+          },
+          "roles": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "List of roles<br />\r\nقائمة الصلاحيات",
+            "nullable": true
+          },
+          "serviceContract": {
+            "type": "string",
+            "description": "User's service contract<br />\r\nالاسم المختصر للجهة",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "securitySchemes": {
+      "jwtAuthorization": {
+        "type": "http",
+        "description": "JWT Authorization header using Bearer scheme",
+        "scheme": "Bearer"
+      }
+    }
+  },
+  "security": [
+    {
+      "jwtAuthorization": []
+    }
+  ]
+}

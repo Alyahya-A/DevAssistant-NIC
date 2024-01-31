@@ -1,0 +1,15 @@
+<Project>
+
+	<PropertyGroup>
+		<AssemblyName>DevAssistant</AssemblyName>
+		<Copyright>Copyright ©  2023 A. Alyahya</Copyright>
+		<Authors>Abdulrahman Alyahya</Authors>
+		<Company>DevAssistant</Company>
+	</PropertyGroup>
+
+	<PropertyGroup>
+		<Product>DevAssistant</Product>
+		<RepositoryUrl>https://github.com/Alyahya-A/DevAssistantArchive.git</RepositoryUrl>
+		<RepositoryType>Git</RepositoryType>
+	</PropertyGroup>
+</Project>

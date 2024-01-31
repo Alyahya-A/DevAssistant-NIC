@@ -1,0 +1,41 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<OutputType>WinExe</OutputType>
+		<TargetFramework>net6.0-windows</TargetFramework>
+		<UseWindowsForms>true</UseWindowsForms>
+		<AssemblyName>DevAssistant</AssemblyName>
+		<Product>DevAssistant Admin</Product>
+		<Copyright>Copyright ©  2022 A. Alyahya</Copyright>
+		<Authors>Abdulrahman Alyahya</Authors>
+		<Company>DevAssistant</Company>
+		<Version>1.0</Version>
+		<ApplicationIcon>programmingV2.ico</ApplicationIcon>
+		<RootNamespace>Dev.Assistant.Dashboard</RootNamespace>
+		<ImplicitUsings>enable</ImplicitUsings>
+
+		<NeutralLanguage>en-US</NeutralLanguage>
+		<satelliteResourceLanguages>en-US</satelliteResourceLanguages>
+
+		<IncludeAllContentForSelfExtract>true</IncludeAllContentForSelfExtract>
+		<RuntimeIdentifier>win-x64</RuntimeIdentifier>
+		<ApplicationManifest>app.manifest</ApplicationManifest>
+	</PropertyGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\..\Business\Dev.Assistant.Business.Core\Dev.Assistant.Business.Core.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Compile Update="App.Home.cs">
+	    <SubType>Form</SubType>
+	  </Compile>
+	  <Compile Update="Controllers\DevButton.cs">
+	    <SubType>Component</SubType>
+	  </Compile>
+	  <Compile Update="LogEvents\LogEvents.Home.cs">
+	    <SubType>UserControl</SubType>
+	  </Compile>
+	</ItemGroup>
+
+</Project>

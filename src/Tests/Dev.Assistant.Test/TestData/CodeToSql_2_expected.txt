@@ -1,0 +1,9 @@
+﻿-- to get the basic person's info
+select PSR022.PERSON_ID as ID, PSR022.SERVICE_TYPE as ServiceTypeCode, PSR022.MALE_REQUESTER_APR as MaleRequestorApproval , PSR022.MALE_REQUESTER_ID as MaleRequestorID
+, PSR022.MALE_RELATIONSHIP as MaleRelationship , PSR022.MALE_APR_EXP_DT as MaleApprovalExpiryDate , PSR022.FEM_REQUESTER_APR as FemaleRequestorApproval , PSR022.FEM_REQUESTER_ID as FemaleRequestorID
+, PSR022.FEM_RELATIONSHIP as FemaleRelationship , PSR022.FEMALE_APR_EXP_DT as FemaleApprovalExpiryDate , IF292.E_SERVICE_DESC as ServiceTypeDescEN
+from dbo.PSR022_DEPEND_PFR PSR022 with(nolock)
+Left Join dbo.IF292_E_SERVICE_ID IF292 with(nolock)
+on PSR022.SERVICE_TYPE = IF292.CODE
+where PSR022.PERSON_ID = @PersonId
+AND PSR022.SERVICE_TYPE = @ServiceType

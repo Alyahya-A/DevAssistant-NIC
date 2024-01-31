@@ -1,0 +1,104 @@
+﻿1- [Done] Get the Name and NameTr for "Add comment "in Auth...." " feature in DA from AuthServer.  ✔
+2- [Done] Generate IG as Word file
+3- [Done] check if first line of XML contains <br/> or not
+4- [Done] avoid annotations if prop have any to get the right index of the XML
+5- Prepare test data
+6- Check-in, add CM and comment link programclly. 
+7- [Done] exclude On Hold tasks from MyWork
+8- [Done] Auto Update 
+9- IsCitizen for IDTypes (IDHelper.IsCitizen)
+10- similarty srtrig for Changeset's comment
+11- upload code
+12- read micros from Server
+13- [Done] log to server (file)
+14- [Done] add length to operatorID
+15- [Done] update IGPropsResult UI
+16- [Done] Kill Word prosess
+17- review report (Check rules + dbo and with(nolock) from utilities app + name space and  controller name etc from generate IG)
+	and [Done] check for Required if there is only one input
+18- اللون الابيض في الجدول 
+19- [Done] save UserSettings to local appsettings if there is a new update
+20- Check for assging output in BL
+21- check if the service start with Micro, if yes, then get all imported micros. if list is one check it with service name. if not equal throw ex.
+	Also, check for file names
+22- remove "is" from IG
+23- MyWork get all CRs for all projects (Apis, Moi, Micro)
+24- [Done] ClientIpAddress for Twk must not be Required
+25- check if all outputs are assigned in BL. and check if assigned output is same as the output ***.PersonID = ***.PersonID ✔
+26- show dialog if there is missing .dbo or nolock keywork to continue
+27- update IG template to make the DateTypr column as "Around" in Text wrapping options
+28- [Done] check if parameters are camelCase (ApiBusiness and controller methods)
+29- [Done] Fix GetAllMethods
+30- FROM dbo.PR018_PRV_RGHT_FN AS PR018 with(nolock) << App returns doesn't have "with(nolock)". we must handle when there is AS keyword.
+31- [Done][GetApiExceptions()] check if user doesn't call the method. if (*** "RequestValidations(**);" )
+32- [Done] check if there is at lest one Req and Res
+33- [Done] Check dublicate refrences in BackendRest
+34- [Done] Check controller's namespace
+35- Check if variable name is match the class name (private readonly Af10Service _wl09Service !!)
+36- Check Api exception if has Ar & En and if the Ar in the correct reutrn
+37- Check if conroller inhernt from ControllerBase
+38- [Done] Check for req & res timestamp
+39- check if xml has 'Establishment' and prop name is **ID then throw an exeption. must be ID
+
+--------------------------------
+
+40- [Done] Refactoring Code:
+
+A- Refactoring the code by splitting the "Dev.Assistant.Common" project into a Business folder. 
+	Each project will be responsible for its features, containing its Models & Services:
+
+		1- Dev.Assistant.Business.Compare (was CompareService in Dev.Assistant.Common):
+			Providing tools and functionalities for comparing different data 
+			such as Json, XML, and all compartions features must be added here (later I will move some from Dev.Assistant.App to here)
+
+		2- Dev.Assistant.Business.Converter:
+			Focusing on data conversion functionalities. It comprises two primary services:
+				1- JsonXmlConvertService (was ConvertService): This service is designed to handle conversions between JSON and XML formats
+				2- SqlConvertService (was SqlService): Service for cleaning and processing SQL queries to convert Code to SQL or SQL to Code.
+			
+			Now with this new structure, if we need to add new conversion functionality, we just create a new service such as JsonXmlConvertService.
+
+		3- Dev.Assistant.Business.Core:
+			The Dev.Assistant.Business.Core project is likely a central part of the Dev.Assistant, serving as the main layer that provides core functionalities and shared resources across projects. 
+		
+			Key aspects of this project:
+				- Core Models: Defines the data structures in the Dev.Assistant applications. These models might represent configuration settings, or common data types.
+				- Enums
+				- Extentions
+				- Utilities and Helpers: Offers a collection of utility functions and helper methods that can be used across different projects within the suite. 
+				- Common Services: Hosts services that are used in multiple projects (or simple services) within the Dev.Assistant or any external service such as AuthServer
+
+		4- Dev.Assistant.Business.Decoder (was ClassService):
+			This library will hold ClassService, I will split it into 2 services or more if I can (still I don't know how! :)~ since the service +3000 line)
+
+			It is designed to manipulate the code. Its primary focus is on decoding code, specifically for C# and VB languages. 
+			
+			The key services and functionalities:
+				- Reads code and picks out important parts like methods and classes. It works with both C# and VB languages.
+				- Validate code and business for API code to helps make sure the code follows NIC standards and certain rules.
+
+		5- Dev.Assistant.Business.Generator (was FileService):
+			This library will hold FileService, I will split it into 2 services, the regular FileService and IgService
+
+			FileService: This service is designed to handle file-related operations, focusing on files with C# code (*.cs files) such as GetCodeByFile().
+			IGService: This service generates documentation and other resources for API, focusing on creating an Integration Guide (IG) and Ndb JSON files.
+			
+
+		6- Dev.Assistant.Configuration
+			To manage configuration settings across multiple projects within the Dev.Assistant.
+
+			Key Elements:
+				- ServerAppSettings and LocalAppSettings: to manage configuration values
+				- Constants:
+
+			By having a common configuration, different projects (like Batch and the main App) can share the same configuration logic and structures.
+	
+
+B- New Source Folder: Creation of a new `src` folder to HOLD all code folders.
+C- Apps Folder: an `Apps` folder under `src` for applications like Dev.Assistant.Batch and Dev.Assistant.App.
+D- Use define all DevAssistantException in one place, we may call it DevErrors!
+
+--------------------------------
+
+41- Complete GenerateMicroIG :(
+42- Add option to bypass all validations when generate IGs

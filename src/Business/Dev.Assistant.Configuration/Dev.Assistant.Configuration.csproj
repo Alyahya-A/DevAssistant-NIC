@@ -1,0 +1,9 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+
+	<Import Project="..\..\Build\Dev.Assistant.Target.props" />
+
+	<ItemGroup>
+		<PackageReference Include="System.Configuration.ConfigurationManager" Version="8.0.0" />
+	</ItemGroup>
+</Project>

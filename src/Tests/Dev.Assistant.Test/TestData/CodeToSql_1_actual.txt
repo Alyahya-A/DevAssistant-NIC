@@ -1,0 +1,48 @@
+﻿// SQL statement
+                cmdText.Append(" %STRING_PLACE_HOLDER% ");
+                cmdText.AppendLine(" CASE WHEN VVR001.ACR005_SPONS_ID is not null THEN VVR001.ACR005_SPONS_ID ELSE VVR001.ACR028_ACR005_ID END as SponsorID, ");
+                cmdText.AppendLine(" VVR001.VISA_NO as VisaNo, VVR001.VISA_ISS_DT as VisaIssueDate, VVR001.BORDER_ID as BorderNo, VVR001.SEX_CODE as Gender, ");
+                cmdText.AppendLine(" VVR001.VISA_DAYS_DURATION as VisaDurationDays, VVR001.OCC_DESC as VisitorOccupation, VVR001.FIRSTT as FirstName, ");
+                cmdText.AppendLine(" VVR001.FATHER as FatherName, VVR001.GRAND as GrandfatherName, VVR001.FAMILY as FamilyName, ");
+                cmdText.AppendLine(" IF201.MOFA_NAT_CODE as NationalityCode, AC204.MOFA_EMBASSY_CODE as EmbassyCode, VV200.DESCRIPTION as RelationshipType, ");
+                cmdText.AppendLine(" ACR005.FILE_NO as SponsorFileNo, ACR028.BUSINESS_NAME as SponsorName, ACR028.P_O_BOX as POBox, ACR028.STREET as Street,");
+                cmdText.AppendLine(" ACR028.TEL_1 as Telephone1, ACR028.TEL_2 as Telephone2, ACR028.ZIP_CODE as ZipCode, ACR028.BRANCH_NAME as BranchName, ");
+                cmdText.AppendLine(" IFR710.DBA_ADDRESS_1 as Address1, IFR710.DBA_ADDRESS_2 as Address2, IFR710.DBA_ADDRESS_3 as Address3, ");
+                cmdText.AppendLine(" IFR700.FIRSTT as SpFirst, IFR700.FATHER as SpFather, IFR700.GRAND as SpGrandfather, IFR700.FAMILY as SpFamily ");
+
+                cmdText.AppendLine(" FROM dbo.VVR001_VISTR_VISA VVR001 with(nolock) ");
+                cmdText.AppendLine(" JOIN dbo.IF201_NATIONALITY IF201 with(nolock) on IF201.CODE = VVR001.LK_NATY ");
+                cmdText.AppendLine(" JOIN dbo.AC204_VISA_ISSU_PL AC204 with(nolock) on AC204.CODE = VVR001.LK_VISA_ISS_PLACE ");
+                cmdText.AppendLine(" JOIN dbo.VV200_VISITOR_REL VV200 with(nolock) on VV200.CODE = VVR001.LK_MOI_VISITOR_REL ");
+
+                // To get SponsorFileNo
+                cmdText.AppendLine(" LEFT JOIN dbo.ACR005_SPONSOR ACR005 with(nolock) on ACR005.ID = VVR001.ACR005_SPONS_ID or ACR005.ID = VVR001.ACR028_ACR005_ID ");
+
+                // To get Sponsor info in case Sponsor is business
+                cmdText.AppendLine(" LEFT JOIN dbo.ACR028_BUSINESS ACR028 with (nolock) ");
+                cmdText.AppendLine(" on ACR028.ACR005_SPONS_ID = VVR001.ACR028_ACR005_ID and ACR028.SEQ = VVR001.ACR028_SEQ ");
+
+                // To get Sponsor info in case Sponsor is domestic or individual
+                cmdText.AppendLine(" LEFT JOIN dbo.IFR710_HOH IFR710 with (nolock) on IFR710.ID = VVR001.ACR005_SPONS_ID ");
+                cmdText.AppendLine(" LEFT JOIN dbo.IFR700_PERSON IFR700 with (nolock) on IFR700.ID = VVR001.ACR005_SPONS_ID ");
+
+                cmdText.AppendLine(" WHERE Convert(date, VVR001.VISA_ISS_DT) = @Date and VVR001.VISA_CANCEL_FLAG = '' ");
+
+
+                if (_includePaging)
+                {
+                    int to, from;
+                    to = req.PageNumber * req.PageRows;
+                    from = to - req.PageRows;
+
+                    cmdText = cmdText.Replace("%STRING_PLACE_HOLDER%", " SELECT * from (SELECT ROW_NUMBER() OVER (ORDER BY VVR001.PDS_TS desc) AS RowNum, "); // First line
+
+                    cmdText.AppendLine(" ) AS RowConstrainedResult ");
+                    cmdText.AppendLine($" WHERE RowNum > {from} and RowNum <= {to}");
+                    cmdText.AppendLine(" ORDER BY RowNum ");
+                }
+                else
+                {
+                    // No pagination, get all records
+                    cmdText = cmdText.Replace("%STRING_PLACE_HOLDER%", " SELECT "); // First line
+                }
